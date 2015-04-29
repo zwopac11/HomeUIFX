@@ -25,6 +25,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import BL.*;
 
 /**
  * FXML Controller class
@@ -175,7 +176,8 @@ public class FrameController implements Initializable {
         gpCal.setStyle("-fx-border-color: red;");
 
         lables();
-
+        XMLReader xmlr = new XMLReader();
+        xmlr.requestFile();
     }
 
 }
