@@ -6,6 +6,7 @@
 package Test;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
@@ -52,27 +53,31 @@ public class FrameController implements Initializable {
             datum.add(0);
         }
         Calendar now = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM");
+        //System.out.println(now.getTime());
         int month= now.get(Calendar.MONTH);
         int max_day_this_month = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH);
         int first_day_this_month = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-        System.out.println("Month: "+month+"last day: "+max_day_this_month+"???: "+first_day_this_month);
+        System.out.println("Month: "+sdf.format(month)+" last day: "+max_day_this_month+" ???: "+first_day_this_month);
         
         for (int i = 0; i < max_day_this_month; i++) {
-            datum.set(i+first_day_this_month, i);
+            datum.set(i+first_day_this_month-1, i+1);
         }
-        for (Integer datum1 : datum) {
-            System.out.println(datum+" ");
-        }
+//        for (Integer datum1 : datum) {
+//            System.out.println(datum+" ");
+//        }
         
         now.add(Calendar.MONTH, -1);
         int max_day_last_month = now.getActualMaximum(Calendar.DAY_OF_MONTH);
         System.out.println("max_day_last_month:"+max_day_last_month);
-        int i = max_day_last_month-first_day_this_month;
+        System.out.println("first_day_this_month-1: "+(first_day_this_month-1));
+        int i = max_day_last_month-((first_day_this_month-1)-1);
+        System.out.println("i:"+i);
         for (int j = 0; j < datum.size(); j++) {
             if(datum.get(j)==0)
             {
                 datum.set(j, i);
-                if(i>=max_day_last_month)
+                if(i>=(max_day_last_month))
                 {
                     i=0;
                 }
@@ -81,20 +86,19 @@ public class FrameController implements Initializable {
             
         }
                
-        
-        for (Integer datum1 : datum) {
-            System.out.println(datum+" ");
-        }
-        
-        
+//        
+//        for (Integer datum1 : datum) {
+//            System.out.println(datum+" ");
+//        }
         
         
         
         
-        for (int k = 0; k < 7; k++) {
-            for (int j = 0; j < 6; j++) {
+        int l =0;
+        for (int j = 1; j < 7; j++) {
+            for (int k = 0; k < 7; k++) {
                 lb = new Label();
-                lb.setText(k+"_"+j);
+                lb.setText(datum.get(l).toString());
                 lb.setId(k+"_"+j);
                 lb.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -107,10 +111,11 @@ public class FrameController implements Initializable {
 
                 gpCal.setHalignment(lb, HPos.CENTER);
                 gpCal.add(lb, k, j+1);
-
+                l++;
             }
 
         }
+        
     }
 
     
