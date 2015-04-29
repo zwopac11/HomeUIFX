@@ -21,11 +21,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+
 import javafx.scene.layout.GridPane;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import BL.*;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -38,21 +40,30 @@ public class FrameController implements Initializable {
     Button bt = new Button();
     Cal cal = new Cal();
 
+    private int this_month;
+    
     @FXML
     private GridPane gpCal;
+    @FXML
+    private Button last;
+    @FXML
+    private Button next;
+    @FXML
+    private Label month;
     //Definition des Action-Events:
-//    @FXML
-//    public void onMo(MouseEvent evt)
-//    {
-//        System.out.println("hallo");
-//    }
-//    public void onAction(MouseEvent evt)
-//    {
-//        System.out.println("Hallo");
-//        System.out.println(tfName.getText());
-//    }
-
-   
+    @FXML
+    public void onLast(ActionEvent evt)
+    {
+        this_month--;
+        cal.setThis_month(this_month);
+        gpCal=cal.lables(gpCal);
+    }
+    public void onNext(ActionEvent evt)
+    {
+        this_month++;
+        cal.setThis_month(this_month);
+        gpCal=cal.lables(gpCal);
+    }
 
 
     /**
@@ -63,6 +74,17 @@ public class FrameController implements Initializable {
         // TODO
         gpCal.setStyle("-fx-border-color: red;");
         gpCal=cal.lables(gpCal);
+        this_month = cal.getThis_month();
+        switch(this_month)
+        {
+            case 1:  month.setText("J");break;
+            case 2:  month.setText("F");break;
+            case 3:  month.setText("M");break;
+            case 4:  month.setText("A");break;
+        }
+        //month.setText(this_month+"");
+      //  System.out.println(month.getText());
+        //month.setText("hallo");
 //        XMLReader xmlr = new XMLReader();
 //        xmlr.requestFile();
     }

@@ -20,18 +20,18 @@ import javafx.scene.layout.GridPane;
  */
 public class Cal {
     
+    private int this_month=4;
     Label lb = new Label();
     
      public GridPane lables(GridPane gpCal) {
 
         int[][] multi = new int[7][6];
         LinkedList<Integer> datum = new LinkedList<>();
-        LinkedList<Integer> datum2 = new LinkedList<>();
         for (int i = 0; i < 42; i++) {
             datum.add(0);
         }
         int year = 2015;
-        int month = 4;
+        int month = this_month;
 //        Calendar now = Calendar.getInstance();
 //        SimpleDateFormat sdf = new SimpleDateFormat("d");
 
@@ -140,6 +140,16 @@ public class Cal {
     public void onLableClick(MouseEvent event) {
         System.out.println("hallo " + event);
     }
+
+    public int getThis_month() {
+        return this_month;
+    }
+
+    public void setThis_month(int this_month) {
+        this.this_month = this_month;
+    }
+    
+    
     
     
 }
