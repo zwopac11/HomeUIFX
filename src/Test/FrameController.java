@@ -28,6 +28,7 @@ import javafx.scene.input.MouseEvent;
 import BL.*;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
+import javafx.scene.layout.RowConstraints;
 
 /**
  * FXML Controller class
@@ -41,7 +42,7 @@ public class FrameController implements Initializable {
     Cal cal = new Cal();
 
     private int this_month;
-    
+
     @FXML
     private GridPane gpCal;
     @FXML
@@ -50,21 +51,71 @@ public class FrameController implements Initializable {
     private Button next;
     @FXML
     private Label month;
+
     //Definition des Action-Events:
+
     @FXML
-    public void onLast(ActionEvent evt)
-    {
+    public void onLast(ActionEvent evt) {
         this_month--;
+        gpCal.getChildren().removeAll();
+        //gpCal.getChildren().remove(3,3);
+//        gpCal.getRowConstraints().remove(4);
+////        gpCal.getChildren().remove(3);
+//        RowConstraints row = new RowConstraints();
+//        //gpCal.getRowConstraints().add(row);
         cal.setThis_month(this_month);
-        gpCal=cal.lables(gpCal);
-    }
-    public void onNext(ActionEvent evt)
-    {
-        this_month++;
-        cal.setThis_month(this_month);
-        gpCal=cal.lables(gpCal);
+        gpCal = cal.lables(gpCal);
+        Month();
     }
 
+    public void onNext(ActionEvent evt) {
+        this_month++;
+        //gpCal.getChildren().clear();
+        cal.setThis_month(this_month);
+        gpCal = cal.lables(gpCal);
+        Month();
+    }
+
+    public void Month() {
+        switch (this_month) {
+            case 1:
+                month.setText("Januar");
+                break;
+            case 2:
+                month.setText("Februar");
+                break;
+            case 3:
+                month.setText("März");
+                break;
+            case 4:
+                month.setText("April");
+                break;
+            case 5:
+                month.setText("Mai");
+                break;
+            case 6:
+                month.setText("Juni");
+                break;
+            case 7:
+                month.setText("Juli");
+                break;
+            case 8:
+                month.setText("August");
+                break;
+            case 9:
+                month.setText("September");
+                break;
+            case 10:
+                month.setText("Oktober");
+                break;
+            case 11:
+                month.setText("November");
+                break;
+            case 12:
+                month.setText("Dezember");
+                break;
+        }
+    }
 
     /**
      * Initializes the controller class.
@@ -73,17 +124,12 @@ public class FrameController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         gpCal.setStyle("-fx-border-color: red;");
-        gpCal=cal.lables(gpCal);
+        gpCal = cal.lables(gpCal);
+        
         this_month = cal.getThis_month();
-        switch(this_month)
-        {
-            case 1:  month.setText("J");break;
-            case 2:  month.setText("F");break;
-            case 3:  month.setText("M");break;
-            case 4:  month.setText("A");break;
-        }
+        Month();
         //month.setText(this_month+"");
-      //  System.out.println(month.getText());
+        //  System.out.println(month.getText());
         //month.setText("hallo");
 //        XMLReader xmlr = new XMLReader();
 //        xmlr.requestFile();

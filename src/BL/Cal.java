@@ -21,6 +21,7 @@ import javafx.scene.layout.GridPane;
 public class Cal {
     
     private int this_month=4;
+    private int year = 2015;
     Label lb = new Label();
     
      public GridPane lables(GridPane gpCal) {
@@ -30,7 +31,7 @@ public class Cal {
         for (int i = 0; i < 42; i++) {
             datum.add(0);
         }
-        int year = 2015;
+         System.out.println("this_month: "+this_month);
         int month = this_month;
 //        Calendar now = Calendar.getInstance();
 //        SimpleDateFormat sdf = new SimpleDateFormat("d");
@@ -41,8 +42,15 @@ public class Cal {
         int last_day_of_this_month = LocalDate.of(year, month, 1).lengthOfMonth();
 
         int first_day_of_last_month = Integer.parseInt(ld.with(DayOfWeek.MONDAY).toString().split("-")[2]);
-
-        int last_day_of_last_month = LocalDate.of(year, month - 1, 1).lengthOfMonth();
+        
+        int last_month=month-1;
+        int last_year=year;
+        if(month==1)
+        {
+            last_month=12;
+            last_year=year-1;
+        }
+        int last_day_of_last_month = LocalDate.of(last_year, last_month, 1).lengthOfMonth();
 
         System.out.println("last_day_of_this_month: " + last_day_of_this_month + " last_day_of_last_month: " + last_day_of_last_month);
         System.out.println("-----------------");
@@ -55,15 +63,17 @@ public class Cal {
                 datum.set(i, help2);
                 help2++;
             } else {
-                
+                System.out.println("i: "+i);
                 datum.set(i, help3);
                 help3++;
             }
 
         }
+        help3=0;
         int m=1;
         for (int j = 0; j < datum.size(); j++) {
             if (datum.get(j) == 0) {
+                
                 datum.set(j, m);
                 m++;
             }
@@ -126,7 +136,8 @@ public class Cal {
                 });
 
                 gpCal.setHalignment(lb, HPos.CENTER);
-                gpCal.add(lb, k, j + 1);
+                //gpCal.setConstraints(lb, k, j + 1);
+                gpCal.add(lb, k, j + 1);               
                 l++;
             }
 
@@ -146,9 +157,18 @@ public class Cal {
     }
 
     public void setThis_month(int this_month) {
+        if(this_month==0)
+        {
+            year--;
+            this_month=12;
+        }
+        if(this_month==13)
+        {
+            year++;
+            this_month=1;
+        }
         this.this_month = this_month;
     }
-    
     
     
     
