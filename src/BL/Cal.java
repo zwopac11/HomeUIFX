@@ -31,23 +31,23 @@ public class Cal {
         for (int i = 0; i < 42; i++) {
             datum.add(0);
         }
-         System.out.println("this_month: "+this_month);
-        int month = this_month;
+         //System.out.println("this_month: "+this_month);
+//        int month = this_month;
 //        Calendar now = Calendar.getInstance();
 //        SimpleDateFormat sdf = new SimpleDateFormat("d");
 
         //LocalDate ld = LocalDate.
-        LocalDate ld = LocalDate.of(year, month, 1);
+        LocalDate ld = LocalDate.of(year, this_month, 1);
 
-        int last_day_of_this_month = LocalDate.of(year, month, 1).lengthOfMonth();
+        int last_day_of_this_month = LocalDate.of(year, this_month, 1).lengthOfMonth();
 
         int first_day_of_last_month = Integer.parseInt(ld.with(DayOfWeek.MONDAY).toString().split("-")[2]);
         
+         //System.out.println("year: "+year);
         
-        
-        int last_month=month-1;
+        int last_month=this_month-1;
         int last_year=year;
-        if(month==1)
+        if(this_month==1)
         {
             last_month=12;
             last_year=year-1;
@@ -59,8 +59,8 @@ public class Cal {
             first_day_of_last_month=last_day_of_last_month;
         }
         
-        System.out.println("last_day_of_this_month: " + last_day_of_this_month + " last_day_of_last_month: " + last_day_of_last_month);
-        System.out.println("-----------------");
+//        System.out.println("last_day_of_this_month: " + last_day_of_this_month + " last_day_of_last_month: " + last_day_of_last_month);
+//        System.out.println("-----------------");
 
         int help = last_day_of_this_month +1+ last_day_of_last_month - first_day_of_last_month;
         int help2 = first_day_of_last_month;
@@ -73,8 +73,8 @@ public class Cal {
                 help2++;
             }
             } else {
-                System.out.println("size: "+datum.size()+"i: "+i);
-                System.out.println(datum);
+//                System.out.println("size: "+datum.size()+"i: "+i);
+//                System.out.println(datum);
                 datum.set(i, help3);
                 help3++;
             }
@@ -90,7 +90,7 @@ public class Cal {
             }
 
         }
-        System.out.println(datum);
+//        System.out.println(datum);
 //        for (Integer datum1 : datum) {
 //            System.out.println(datum + " ");
 //        }
@@ -179,6 +179,10 @@ public class Cal {
             this_month=1;
         }
         this.this_month = this_month;
+    }
+
+    public int getYear() {
+        return year;
     }
     
     

@@ -57,6 +57,7 @@ public class FrameController implements Initializable {
 
     @FXML
     public void onLast(ActionEvent evt) {
+        this_month=cal.getThis_month();
         this_month--;
         
         resetGridPane();
@@ -73,6 +74,7 @@ public class FrameController implements Initializable {
     }
 
     public void onNext(ActionEvent evt) {
+       this_month=cal.getThis_month();
         this_month++;
         
         resetGridPane();
@@ -82,7 +84,7 @@ public class FrameController implements Initializable {
         gpCal = cal.lables(gpCal);
         Month();
     }
-
+    
     public void resetGridPane()
     {
                 Node node1 = gpCal.getChildren().get(0);
@@ -109,42 +111,43 @@ public class FrameController implements Initializable {
     }
     
     public void Month() {
+        int year = cal.getYear();
         switch (this_month) {
             case 1:
-                month.setText("Januar");
+                month.setText(year+" Januar");
                 break;
             case 2:
-                month.setText("Februar");
+                month.setText(year+" Februar");
                 break;
             case 3:
-                month.setText("März");
+                month.setText(year+" März");
                 break;
             case 4:
-                month.setText("April");
+                month.setText(year+" April");
                 break;
             case 5:
-                month.setText("Mai");
+                month.setText(year+" Mai");
                 break;
             case 6:
-                month.setText("Juni");
+                month.setText(year+" Juni");
                 break;
             case 7:
-                month.setText("Juli");
+                month.setText(year+" Juli");
                 break;
             case 8:
-                month.setText("August");
+                month.setText(year+" August");
                 break;
             case 9:
-                month.setText("September");
+                month.setText(year+" September");
                 break;
             case 10:
-                month.setText("Oktober");
+                month.setText(year+" Oktober");
                 break;
             case 11:
-                month.setText("November");
+                month.setText(year+" November");
                 break;
             case 12:
-                month.setText("Dezember");
+                month.setText(year+" Dezember");
                 break;
         }
     }
