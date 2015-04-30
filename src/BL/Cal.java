@@ -43,6 +43,8 @@ public class Cal {
 
         int first_day_of_last_month = Integer.parseInt(ld.with(DayOfWeek.MONDAY).toString().split("-")[2]);
         
+        
+        
         int last_month=month-1;
         int last_year=year;
         if(month==1)
@@ -52,6 +54,11 @@ public class Cal {
         }
         int last_day_of_last_month = LocalDate.of(last_year, last_month, 1).lengthOfMonth();
 
+        if(first_day_of_last_month==1)
+        {
+            first_day_of_last_month=last_day_of_last_month;
+        }
+        
         System.out.println("last_day_of_this_month: " + last_day_of_this_month + " last_day_of_last_month: " + last_day_of_last_month);
         System.out.println("-----------------");
 
@@ -59,11 +66,15 @@ public class Cal {
         int help2 = first_day_of_last_month;
         int help3 = 1;
         for (int i = 0; i < help; i++) {
+            if(last_day_of_last_month!=first_day_of_last_month)
+            {
             if (i <= last_day_of_last_month - first_day_of_last_month) {
                 datum.set(i, help2);
                 help2++;
+            }
             } else {
-                System.out.println("i: "+i);
+                System.out.println("size: "+datum.size()+"i: "+i);
+                System.out.println(datum);
                 datum.set(i, help3);
                 help3++;
             }
@@ -79,7 +90,7 @@ public class Cal {
             }
 
         }
-        
+        System.out.println(datum);
 //        for (Integer datum1 : datum) {
 //            System.out.println(datum + " ");
 //        }

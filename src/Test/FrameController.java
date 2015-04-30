@@ -27,6 +27,7 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import BL.*;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.RowConstraints;
 
@@ -57,7 +58,10 @@ public class FrameController implements Initializable {
     @FXML
     public void onLast(ActionEvent evt) {
         this_month--;
-        gpCal.getChildren().removeAll();
+        
+        resetGridPane();
+        
+        //gpCal.getChildren().removeAll();
         //gpCal.getChildren().remove(3,3);
 //        gpCal.getRowConstraints().remove(4);
 ////        gpCal.getChildren().remove(3);
@@ -70,12 +74,40 @@ public class FrameController implements Initializable {
 
     public void onNext(ActionEvent evt) {
         this_month++;
+        
+        resetGridPane();
+        
         //gpCal.getChildren().clear();
         cal.setThis_month(this_month);
         gpCal = cal.lables(gpCal);
         Month();
     }
 
+    public void resetGridPane()
+    {
+                Node node1 = gpCal.getChildren().get(0);
+                Node node2 = gpCal.getChildren().get(1);
+                Node node3 = gpCal.getChildren().get(2);
+                Node node4 = gpCal.getChildren().get(3);
+                Node node5 = gpCal.getChildren().get(4);
+                Node node6 = gpCal.getChildren().get(5);
+                Node node7 = gpCal.getChildren().get(6);
+                Node node8 = gpCal.getChildren().get(7);
+                Node node9 = gpCal.getChildren().get(8);
+                Node node10 = gpCal.getChildren().get(9);
+                gpCal.getChildren().clear();
+                gpCal.getChildren().add(0,node1);
+                gpCal.getChildren().add(1,node2);
+                gpCal.getChildren().add(2,node3);
+                gpCal.getChildren().add(3,node4);
+                gpCal.getChildren().add(4,node5);
+                gpCal.getChildren().add(5,node6);
+                gpCal.getChildren().add(6,node7);
+                gpCal.getChildren().add(7,node8);
+                gpCal.getChildren().add(8,node9);
+                gpCal.getChildren().add(9,node10);
+    }
+    
     public void Month() {
         switch (this_month) {
             case 1:
