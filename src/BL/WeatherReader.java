@@ -25,8 +25,8 @@ public class WeatherReader {
     String url = "http://apidev.accuweather.com/locations/v1/cities/autocomplete?apikey=30915";
     //http://apidev.accuweather.com/locations/v1/search?q=graz&apikey=meSocYcloNe
 
-    public void read() {
-        
+    public WeatherDay read() {
+        WeatherDay curDay=null;
         try {
             //H:\Dropbox\POS\HomeUI\HomeUIFX\src\data\weatherdata.xml
             File fXmlFile = new File(System.getProperty("user.dir")+File.separator+"src"+File.separator+"data"+File.separator+"weatherdata.xml");
@@ -55,7 +55,7 @@ public class WeatherReader {
             Element humidity = (Element)child.getElementsByTagName("humidity").item(0);
             Element precipMM = (Element)child.getElementsByTagName("precipMM").item(0);
             Element cloudcover = (Element)child.getElementsByTagName("cloudcover").item(0);
-            WeatherDay curDay = new WeatherDay(temp.getTextContent(), weatherCode.getTextContent(), precipMM.getTextContent(), humidity.getTextContent(),cloudcover.getTextContent());
+            curDay = new WeatherDay(temp.getTextContent(), weatherCode.getTextContent(), precipMM.getTextContent(), humidity.getTextContent(),cloudcover.getTextContent());
             
             System.out.println(temp.getTextContent());
              
@@ -63,6 +63,7 @@ public class WeatherReader {
         } catch (Exception e) {
                 System.out.println(e.toString());
         }
+        return curDay;
     }
     
     
