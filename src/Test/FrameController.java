@@ -35,6 +35,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
@@ -59,6 +60,10 @@ public class FrameController implements Initializable {
     private Button next;
     @FXML
     private Label month;
+    @FXML
+    private TextField tfWeather;
+    @FXML
+    private Label lbWeather;
 
     @FXML
     private GridPane gpNews;
@@ -180,7 +185,7 @@ public class FrameController implements Initializable {
         gpCal.setStyle("-fx-border-color: red;");
         gpNews.setStyle("-fx-border-color: blue;");
         gpCal = cal.lables(gpCal);
-
+        
         this_month = cal.getThis_month();
         Month();
         //month.setText(this_month+"");
