@@ -5,6 +5,7 @@
  */
 package Test;
 
+import BL.WeatherReader;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -28,6 +29,8 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root));
 //        primaryStage.setFullScreen(true);
         primaryStage.show();
+        WeatherReader xml = new WeatherReader();
+        xml.read();
     }
 
     /**
