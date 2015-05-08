@@ -26,10 +26,17 @@ import javafx.scene.layout.GridPane;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import BL.*;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -53,9 +60,15 @@ public class FrameController implements Initializable {
     @FXML
     private Label month;
 
+    @FXML
+    private GridPane gpNews;
     //Definition des Action-Events:
 
     @FXML
+    /**
+     * Goes to the month before
+     * @param evt
+     */
     public void onLast(ActionEvent evt) {
         this_month=cal.getThis_month();
         this_month--;
@@ -72,19 +85,21 @@ public class FrameController implements Initializable {
         gpCal = cal.lables(gpCal);
         Month();
     }
-
+    /**
+     * Goes to the next Month
+     * @param evt 
+     */
     public void onNext(ActionEvent evt) {
        this_month=cal.getThis_month();
         this_month++;
-        
         resetGridPane();
-        
-        //gpCal.getChildren().clear();
         cal.setThis_month(this_month);
         gpCal = cal.lables(gpCal);
         Month();
     }
-    
+    /**
+     * Resets the calendar GridPane too the original state
+     */
     public void resetGridPane()
     {
                 Node node1 = gpCal.getChildren().get(0);
@@ -110,47 +125,51 @@ public class FrameController implements Initializable {
                 gpCal.getChildren().add(9,node10);
     }
     
+    /**
+     * sets the month and the year on the label month, which is the label in the first row of the calendar Gridpane 
+     */
     public void Month() {
         int year = cal.getYear();
         switch (this_month) {
             case 1:
-                month.setText(year+" Januar");
+                month.setText("Januar "+year);
                 break;
             case 2:
-                month.setText(year+" Februar");
+                month.setText("Februar "+year);
                 break;
             case 3:
-                month.setText(year+" März");
+                month.setText("März "+year);
                 break;
             case 4:
-                month.setText(year+" April");
+                month.setText("April "+year);
                 break;
             case 5:
-                month.setText(year+" Mai");
+                month.setText("Mai "+year);
                 break;
             case 6:
-                month.setText(year+" Juni");
+                month.setText("Juni "+year);
                 break;
             case 7:
-                month.setText(year+" Juli");
+                month.setText("Juli "+year);
                 break;
             case 8:
-                month.setText(year+" August");
+                month.setText("August "+year);
                 break;
             case 9:
-                month.setText(year+" September");
+                month.setText("September "+year);
                 break;
             case 10:
-                month.setText(year+" Oktober");
+                month.setText("Oktober "+year);
                 break;
             case 11:
-                month.setText(year+" November");
+                month.setText("November "+year);
                 break;
             case 12:
-                month.setText(year+" Dezember");
+                month.setText("Dezember "+year);
                 break;
         }
     }
+    
 
     /**
      * Initializes the controller class.
@@ -159,8 +178,9 @@ public class FrameController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         gpCal.setStyle("-fx-border-color: red;");
+        gpNews.setStyle("-fx-border-color: blue;");
         gpCal = cal.lables(gpCal);
-        
+
         this_month = cal.getThis_month();
         Month();
         //month.setText(this_month+"");
