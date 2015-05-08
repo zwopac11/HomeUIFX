@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.web.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -60,12 +61,12 @@
                </children>
             </GridPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
-               <center>
-                  <Label fx:id="lbWeather" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Label" BorderPane.alignment="CENTER" />
-               </center>
                <bottom>
                   <TextField fx:id="tfWeather" BorderPane.alignment="CENTER" />
                </bottom>
+               <center>
+                  <WebView fx:id="wbWeather" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </center>
             </BorderPane>
          </children>
       </GridPane>

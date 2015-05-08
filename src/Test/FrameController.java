@@ -37,6 +37,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 /**
@@ -63,7 +64,7 @@ public class FrameController implements Initializable {
     @FXML
     private TextField tfWeather;
     @FXML
-    private Label lbWeather;
+    private WebView wbWeather;
 
     @FXML
     private GridPane gpNews;
