@@ -235,7 +235,9 @@ public class Cal {
             stage.show();
             
             NewAppointmentController controller = fxmlLoader.<NewAppointmentController>getController();
+            //NewAppointmentController controller = 
             //controller.test();
+            System.out.println(fxmlLoader);
             System.out.println(tag[1].split(",")[0]+" "+this_month+" "+year);
             
             //controller.setDay(tag[1].split(",")[0],this_month,year);

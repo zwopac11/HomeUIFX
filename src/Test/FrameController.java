@@ -37,6 +37,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
@@ -189,6 +190,9 @@ public class FrameController implements Initializable {
         
         this_month = cal.getThis_month();
         Month();
+        
+        WebEngine webEngine = wbWeather.getEngine();
+        webEngine.loadContent("<b>asdf</b>");
         //month.setText(this_month+"");
         //  System.out.println(month.getText());
         //month.setText("hallo");
