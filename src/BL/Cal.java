@@ -6,24 +6,41 @@
 package BL;
 
 import Test.NewAppointmentController;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.Calendar;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
+import javafx.scene.control.TooltipBuilder;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javax.swing.text.StyleConstants;
+import javafx.util.Duration;
+
+
 
 /**
  *
@@ -31,9 +48,16 @@ import javax.swing.text.StyleConstants;
  */
 public class Cal {
 
-    private int this_month = 5;
+    private int this_month=5;
     private int year = 2015;
+    private LinkedList<Termin> termine = new LinkedList<>();
     Label lb = new Label();
+
+    public Cal() {
+        Calendar now = Calendar.getInstance();
+        this_month=now.get(Calendar.MONTH)+1;
+        year= now.get(Calendar.YEAR);
+    }
 
     /**
      * Sets on the GridPane all the Labels with alle the dayes of the month
@@ -60,9 +84,9 @@ public class Cal {
 
         int first_day_of_last_month = Integer.parseInt(ld.with(DayOfWeek.MONDAY).toString().split("-")[2]);
 
-        String adfas= LocalDate.of(year, this_month, 1).getDayOfWeek().toString();
-        int first_day=0;
-        switch(adfas){
+        String adfas = LocalDate.of(year, this_month, 1).getDayOfWeek().toString();
+        int first_day = 0;
+        switch (adfas) {
             case "SATURDAY":
                 first_day = 5;
                 break;
@@ -85,11 +109,11 @@ public class Cal {
                 first_day = 4;
                 break;
         }
-        int hallo=1;
-        for (int i = first_day; i < first_day+last_day_of_this_month; i++) {
+        int hallo = 1;
+        for (int i = first_day; i < first_day + last_day_of_this_month; i++) {
             datum.add(i, hallo);
             hallo++;
-            
+
         }
 //        System.out.println(datum);
 //        System.out.println(adfas);
@@ -181,23 +205,76 @@ public class Cal {
 ////        for (Integer datum1 : datum) {
 ////            System.out.println(datum+" ");
 ////        }
+        termine.clear();
+
+        try {
+            readFile();
+        } catch (IOException ex) {
+            Logger.getLogger(Cal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
         int l = 0;
         for (int j = 1; j < 7; j++) {
             for (int k = 0; k < 7; k++) {
                 lb = new Label();
-                if(datum.get(l)==0)
-                {
-                  //int dat = datum.get(l)-100;
-                  lb.setText("");  
-                  lb.setId(datum.get(l)+"");
-                  lb.setTextFill(Color.web("#0076a3"));
+                if (datum.get(l) == 0) {
+                    //int dat = datum.get(l)-100;
+                    lb.setText("");
+                    lb.setId(datum.get(l) + "");
+                    lb.setTextFill(Color.web("#0076a3"));
                   //lb.setStyle("-fx-background-color: white;");
-                  //lb.setStyle("-fx-background-color: white; -fx-padding: 10px;");
-                }
-                else
-                {
+                    //lb.setStyle("-fx-background-color: white; -fx-padding: 10px;");
+                } else {
                     lb.setText(datum.get(l).toString());
-                    lb.setId(datum.get(l)+"");
+                    lb.setId(datum.get(l) + "");
+                    String tolltipString = "";
+                    for (Termin termins : termine) {
+                        
+                        if(termins.getDay()==datum.get(l)&&termins.getMonth()==this_month&&termins.getYear()==year)
+                        {
+                            tolltipString+=termins.toString()+"\n";
+//////                            Tooltip tp = new Tooltip(termins.toString());
+                            
+                            
+//                            Tooltip.TooltipBehavior BEHAVIOR = new Tooltip.TooltipBehavior(new Duration(1000), new Duration(5000), new Duration(200), false);
+                            
+                            //Tooltip.install(lb, tp);
+                            
+                            
+//////////                            lb.setTooltip(tp);
+//////////                            lb.setTextFill(Color.web("#0076a3"));
+//////////                            
+//////////                            tp.setAutoHide(true);
+//                            Tooltip tooltip = new Tooltip();
+//                            tooltip.setText("hallo");
+//                            lb.setTooltip(tooltip);
+                            
+                            //lb.setTooltip(new Tooltip("Tooltip for Button"));
+//                            lb.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+//                            
+//                                @Override
+//                                public void handle(MouseEvent event) {
+//                                    System.out.println("adfs");
+//                                    //lb.setTooltip(new Tooltip("Tooltip for Button"));
+//                                    
+//                                }
+//                                
+//                            });
+                            //http://www.java2s.com/Code/Java/JavaFX/MouseinandouteventforButton.htm
+                            //https://www.google.at/webhp?sourceid=chrome-instant&rlz=1C1GKLA_enAT598AT598&ion=1&espv=2&ie=UTF-8#q=javafx+mouse+over+event
+                        }
+                    }
+                    if(!tolltipString.equals(""))
+                    {
+                     Tooltip tp = new Tooltip(tolltipString);
+                     lb.setTooltip(tp);
+                     lb.setTextFill(Color.web("#0076a3"));
+                     tp.setAutoHide(true);   
+                    }
+                    
+                    
                     lb.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
                         @Override
@@ -230,22 +307,22 @@ public class Cal {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Test/NewAppointment.fxml"));
         try {
             root = fxmlLoader.load();
+            NewAppointmentController controller = fxmlLoader.getController();
+
+            System.out.println("controller: " + controller);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
-            
-            NewAppointmentController controller = fxmlLoader.<NewAppointmentController>getController();
-            //NewAppointmentController controller = 
-            //controller.test();
+
             System.out.println(fxmlLoader);
-            System.out.println(tag[1].split(",")[0]+" "+this_month+" "+year);
-            
-            //controller.setDay(tag[1].split(",")[0],this_month,year);
+            System.out.println(tag[1].split(",")[0] + " " + this_month + " " + year);
+
+            controller.setDay(tag[1].split(",")[0], this_month, year);
+            controller.setStage(stage);
         } catch (IOException ex) {
             System.out.println(ex.toString());
         }
-        
-        
+
     }
 
     public int getThis_month() {
@@ -272,6 +349,26 @@ public class Cal {
 
     public int getYear() {
         return year;
+    }
+
+    public void readFile() throws FileNotFoundException, IOException {
+
+        File file = new File(System.getProperty("user.dir") + File.separator + "src" + File.separator + "data" + File.separator + "termine.svg");
+        
+        FileReader fr = new FileReader(file);
+        BufferedReader br = new BufferedReader(fr);
+        String zeile = "";
+        
+        while( (zeile = br.readLine()) != null )
+        {
+             String [] str = zeile.split(";");
+             Termin termin = new Termin(Integer.parseInt(str[0]), Integer.parseInt(str[1]), Integer.parseInt(str[2]), str[3], str[4], str[5]);
+             termine.add(termin);
+        }
+        for (Termin termins : termine) {
+            System.out.println(termins.toString());
+        }
+         br.close();
     }
 
 }
