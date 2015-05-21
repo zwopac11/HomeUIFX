@@ -36,6 +36,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -69,6 +70,7 @@ public class FrameController implements Initializable {
 
     @FXML
     private GridPane gpNews;
+    
     //Definition des Action-Events:
 
     @FXML
@@ -186,6 +188,7 @@ public class FrameController implements Initializable {
         // TODO
         gpCal.setStyle("-fx-border-color: red;");
         gpNews.setStyle("-fx-border-color: blue;");
+        
         gpCal = cal.lables(gpCal);
         
         this_month = cal.getThis_month();
