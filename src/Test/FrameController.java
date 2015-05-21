@@ -191,8 +191,11 @@ public class FrameController implements Initializable {
         this_month = cal.getThis_month();
         Month();
         
+        
+        WeatherReader xml = new WeatherReader();
+        WeatherDay curDay= xml.read();
         WebEngine webEngine = wbWeather.getEngine();
-        webEngine.loadContent("<b>asdf</b>");
+        webEngine.loadContent(curDay.toString());
         //month.setText(this_month+"");
         //  System.out.println(month.getText());
         //month.setText("hallo");

@@ -9,6 +9,9 @@ package BL;
  *
  * @author Claudio
  */
-public class FeedItem {
-    
+public class RssItem {
+    public  String title;
+    public  String description;
+    public  String link;
+    public  String pubDate;
 }

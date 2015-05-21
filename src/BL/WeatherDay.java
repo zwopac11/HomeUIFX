@@ -17,6 +17,7 @@ public class WeatherDay {
     String precipMM;
     String humidity;
     String cloudcover;
+    String desc;
 
     public WeatherDay(String temp_C, String weatherCode, String precipMM, String humidity, String cloudcover) {
         this.temp_C = temp_C;
@@ -78,8 +79,8 @@ public class WeatherDay {
     }
 
     public String getWeatherDesc(String code) {
-        String desc = "";
-        switch (Integer.getInteger(code)) {
+         desc = "";
+        switch (Integer.parseInt(code)) {
             case 395:
                 desc = "Moderate or heavy snow in area with thunder";
                 break;
@@ -224,6 +225,7 @@ public class WeatherDay {
             case 113:
                 desc = "Clear/Sunny";
                 break;
+            default: desc="not listed";
             
                 
                 
