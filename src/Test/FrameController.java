@@ -188,6 +188,7 @@ public class FrameController implements Initializable {
         // TODO
         gpCal.setStyle("-fx-border-color: red;");
         gpNews.setStyle("-fx-border-color: blue;");
+        
         gpCal = cal.lables(gpCal);
         
         this_month = cal.getThis_month();

@@ -9,7 +9,7 @@ import Test.NewAppointmentController;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
+
 import java.awt.event.MouseAdapter;
 import java.io.BufferedReader;
 import java.io.File;
@@ -37,9 +37,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import java.awt.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 
 
 /**
@@ -54,6 +54,9 @@ public class Cal {
     Label lb = new Label();
 
     public Cal() {
+        
+        //http://michaelkipp.de/processing/25%20gui2.html
+        
         Calendar now = Calendar.getInstance();
         this_month=now.get(Calendar.MONTH)+1;
         year= now.get(Calendar.YEAR);
@@ -219,6 +222,13 @@ public class Cal {
         for (int j = 1; j < 7; j++) {
             for (int k = 0; k < 7; k++) {
                 lb = new Label();
+                
+                //gpCal.getChildren().get(k).setStyle("-fx-background-color: red");
+                
+//                lb.maxWidth(1.7976931348623157E308);
+//                lb.maxHeight(1.7976931348623157E308);
+                //lb.setStyle("-fx-background-color: red;");
+                
                 if (datum.get(l) == 0) {
                     //int dat = datum.get(l)-100;
                     lb.setText("");
@@ -370,5 +380,7 @@ public class Cal {
         }
          br.close();
     }
+
+    
 
 }

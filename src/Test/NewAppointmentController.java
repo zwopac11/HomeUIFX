@@ -58,6 +58,7 @@ public class NewAppointmentController implements Initializable {
             FileWriter fw = new FileWriter(file,true);
             fw.write(day+";"+month+";"+year+";"+tfName.getText()+";"+tfVon.getText()+";"+tfBis.getText()+"\n");
             fw.close();
+            
         } catch (FileNotFoundException ex) {
             System.out.println(ex.toString());
         } catch (IOException ex) {
