@@ -46,6 +46,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * FXML Controller class
@@ -56,7 +57,7 @@ public class FrameController implements Initializable {
 
     Label lb = new Label();
     Button bt = new Button();
-    Cal cal = new Cal();
+    Cal cal;
 
     private int this_month;
 
@@ -131,6 +132,14 @@ public class FrameController implements Initializable {
 //        }
     }
     
+    private void Reload()
+    {
+        resetGridPane();
+        cal.setThis_month(this_month);
+        gpCal = cal.lables(gpCal);
+        Month();
+    }
+    
     /**
      * Resets the calendar GridPane too the original state
      */
@@ -202,6 +211,19 @@ public class FrameController implements Initializable {
                 month.setText("Dezember "+year);
                 break;
         }
+    }
+
+    
+    public FrameController() {
+        Stage stage = new Stage();
+        stage.setOnHiding(new EventHandler<WindowEvent>() {
+                public void handle(WindowEvent we) {
+                    Reload();
+                    
+                }
+            });  
+        cal  = new Cal(stage);
+        
     }
     
 

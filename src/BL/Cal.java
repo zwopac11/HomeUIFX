@@ -5,6 +5,7 @@
  */
 package BL;
 
+import Test.FrameController;
 import Test.NewAppointmentController;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -53,14 +54,16 @@ public class Cal {
     private int year = 2015;
     private LinkedList<Termin> termine = new LinkedList<>();
     Label lb = new Label();
+    private Stage stage;
 
-    public Cal() {
+    public Cal(Stage stage){
         
         //http://michaelkipp.de/processing/25%20gui2.html
         
         Calendar now = Calendar.getInstance();
         this_month=now.get(Calendar.MONTH)+1;
         year= now.get(Calendar.YEAR);
+        this.stage = stage;
     }
 
     /**
@@ -321,16 +324,16 @@ public class Cal {
             NewAppointmentController controller = fxmlLoader.getController();
 
             //System.out.println("controller: " + controller);
-            Stage stage = new Stage();
+            
             stage.setScene(new Scene(root));
             stage.show();
-
-            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-                public void handle(WindowEvent we) {
-                    System.out.println("Stage is closing");
-                    
-                }
-            });    
+            
+//            stage.setOnHiding(new EventHandler<WindowEvent>() {
+//                public void handle(WindowEvent we) {
+//                    System.out.println("Stage is closing");
+//                    
+//                }
+//            });  
             
 //            System.out.println(fxmlLoader);
 //            System.out.println(tag[1].split(",")[0] + " " + this_month + " " + year);
