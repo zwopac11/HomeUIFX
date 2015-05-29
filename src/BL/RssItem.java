@@ -13,5 +13,19 @@ public class RssItem {
     public  String title;
     public  String description;
     public  String link;
-    public  String pubDate;
+
+    public RssItem(String title, String description, String link) {
+        this.title = title;
+        this.description = description;
+        this.link = link;
+    }
+
+    @Override
+    public String toString() {
+        return "<b>" + title + "</b><br>" + description + "<br>Source: " + link;
+    }
+    
+    
+    
+    
 }

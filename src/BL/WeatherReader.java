@@ -23,7 +23,7 @@ public class WeatherReader {
     //File request = new File("http://xoap.weather.com/weather/local/30915");
     //File fXmlFile = new File(System.getProperty("user.dir")+"\\"+"src\\"+"xml_file.xml"
     String url = "http://apidev.accuweather.com/locations/v1/cities/autocomplete?apikey=30915";
-    //http://apidev.accuweather.com/locations/v1/search?q=graz&apikey=meSocYcloNe
+    //C
 
     public WeatherDay read() {
         WeatherDay curDay=null;
