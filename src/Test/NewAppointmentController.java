@@ -12,15 +12,24 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -43,7 +52,7 @@ public class NewAppointmentController implements Initializable {
     
      @FXML
     /**
-     * Saves the data
+     * Saves the data and makes sure that the time is a date
      * @param evt
      */
     public void onOkay(ActionEvent evt)  {
@@ -52,27 +61,38 @@ public class NewAppointmentController implements Initializable {
         FileOutputStream fos=null;
         try {
             //tfName.getText();
-            
+            DateFormat format = new SimpleDateFormat("kk:mm", Locale.ENGLISH);
+            Date date = format.parse(tfVon.getText());
+            Date date2 = format.parse(tfBis.getText());
+            //System.out.println(date+" "+date2);
             
             File file=new File(System.getProperty("user.dir")+File.separator+"src"+File.separator+"data"+File.separator+"termine.svg");
             FileWriter fw = new FileWriter(file,true);
             fw.write(day+";"+month+";"+year+";"+tfName.getText()+";"+tfVon.getText()+";"+tfBis.getText()+"\n");
             fw.close();
             
+            Stage stage = (Stage) lbTitle.getScene().getWindow();
+            stage.close();    
+            
         } catch (FileNotFoundException ex) {
             System.out.println(ex.toString());
         } catch (IOException ex) {
             System.out.println(ex.toString());
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "Not a time!", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
        
     }
+    
      /**
      * Closes the window
      * @param evt
      */
     public void onCancel(ActionEvent evt) {
+        Stage stage = (Stage) lbTitle.getScene().getWindow();
         stage.close();
+        //stage.close();
     }
     
     

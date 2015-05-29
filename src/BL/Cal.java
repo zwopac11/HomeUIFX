@@ -39,6 +39,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import java.awt.Font;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 
@@ -306,29 +307,39 @@ public class Cal {
     }
 
     /**
-     *
+     *opens a new java FX window to create new appointment
      * @param event
      */
     public void onLableClick(MouseEvent event) {
-        System.out.println(event.toString());
+        //System.out.println(event.toString());
         String[] tag = event.toString().split("id=");
-        System.out.println(tag[1].split(",")[0]);
+        //System.out.println(tag[1].split(",")[0]);
         Parent root;
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Test/NewAppointment.fxml"));
         try {
             root = fxmlLoader.load();
             NewAppointmentController controller = fxmlLoader.getController();
 
-            System.out.println("controller: " + controller);
+            //System.out.println("controller: " + controller);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
 
-            System.out.println(fxmlLoader);
-            System.out.println(tag[1].split(",")[0] + " " + this_month + " " + year);
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                public void handle(WindowEvent we) {
+                    System.out.println("Stage is closing");
+                    
+                }
+            });    
+            
+//            System.out.println(fxmlLoader);
+//            System.out.println(tag[1].split(",")[0] + " " + this_month + " " + year);
 
             controller.setDay(tag[1].split(",")[0], this_month, year);
             controller.setStage(stage);
+            
+             
+            
         } catch (IOException ex) {
             System.out.println(ex.toString());
         }
@@ -361,6 +372,11 @@ public class Cal {
         return year;
     }
 
+    /**
+     * reads all appointments from the svg file
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public void readFile() throws FileNotFoundException, IOException {
 
         File file = new File(System.getProperty("user.dir") + File.separator + "src" + File.separator + "data" + File.separator + "termine.svg");
@@ -375,9 +391,9 @@ public class Cal {
              Termin termin = new Termin(Integer.parseInt(str[0]), Integer.parseInt(str[1]), Integer.parseInt(str[2]), str[3], str[4], str[5]);
              termine.add(termin);
         }
-        for (Termin termins : termine) {
-            System.out.println(termins.toString());
-        }
+//        for (Termin termins : termine) {
+//            System.out.println(termins.toString());
+//        }
          br.close();
     }
 

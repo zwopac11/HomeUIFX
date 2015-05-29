@@ -27,6 +27,8 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import BL.*;
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -194,6 +196,10 @@ public class FrameController implements Initializable {
         this_month = cal.getThis_month();
         Month();
         
+        //gpCal.setStyle("-fx-background-color: black;");
+        
+        //String string = "January 2, 2010";
+         
         
         WeatherReader xml = new WeatherReader();
         WeatherDay curDay= xml.read();

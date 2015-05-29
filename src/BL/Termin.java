@@ -5,6 +5,15 @@
  */
 package BL;
 
+import Test.FrameController;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Paul
@@ -71,9 +80,33 @@ public class Termin {
         this.bis = bis;
     }
 
+    /**
+     * checks if the time is a date
+     * @return text of appointments 
+     */
     @Override
     public String toString() {
-        return "Termin{" + "day=" + day + "\n, year=" + year + ", month=" + month + ", name=" + name + ", von=" + von + ", bis=" + bis + '}';
+//        Date date = new SimpleDateFormat("HH:mm").parse(von+"");
+//        String newString = new SimpleDateFormat("H:mm").format(date);
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("kk:mm");
+        DateFormat format = new SimpleDateFormat("kk:mm", Locale.ENGLISH);
+        Date date,date2;
+        Date start_date,end_date;
+        try {
+            date = format.parse(von);
+            start_date=date;
+            date2 = format.parse(bis);
+            end_date=date2;
+            //System.out.println(date); 
+            return  name + "\n" + sdf.format(start_date) + " - " + sdf.format(end_date) + ' ';
+        } catch (ParseException ex) {
+            Logger.getLogger(FrameController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        return  name + "\n" + von + " - " + bis + ' ';
     }
     
     
