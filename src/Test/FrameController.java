@@ -26,7 +26,9 @@ import javafx.scene.layout.GridPane;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import BL.*;
+import java.awt.BorderLayout;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.text.ParseException;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -36,6 +38,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
@@ -69,9 +72,11 @@ public class FrameController implements Initializable {
     private TextField tfWeather;
     @FXML
     private WebView wbWeather;
-
     @FXML
-    private GridPane gpNews;
+    private WebView wbNews;
+    
+    @FXML
+    private ComboBox cbNews;
     
     //Definition des Action-Events:
 
@@ -108,6 +113,24 @@ public class FrameController implements Initializable {
         gpCal = cal.lables(gpCal);
         Month();
     }
+    /**
+     * 
+     * @param evt 
+     */
+    public void onCbChange(ActionEvent evt)
+    {
+//        try {
+//            String output = (String) cbNews.getValue();
+//            System.out.println(output);
+//            
+//            FeedReader reader = new FeedReader();
+//            reader.setURL(new URL("http://rss.orf.at/news.xml"));
+//            reader.getFeed();
+//        } catch (MalformedURLException ex) {
+//            Logger.getLogger(FrameController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }
+    
     /**
      * Resets the calendar GridPane too the original state
      */
@@ -189,7 +212,7 @@ public class FrameController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         gpCal.setStyle("-fx-border-color: red;");
-        gpNews.setStyle("-fx-border-color: blue;");
+        //gpNews.setStyle("-fx-border-color: blue;");
         
         gpCal = cal.lables(gpCal);
         
@@ -205,6 +228,9 @@ public class FrameController implements Initializable {
         WeatherDay curDay= xml.read();
         WebEngine webEngine = wbWeather.getEngine();
         webEngine.loadContent(curDay.toString());
+        cbNews.getItems().addAll("news","sport","discussion","help","science","oe3","fm4");
+        cbNews.setValue("news");
+        
         //month.setText(this_month+"");
         //  System.out.println(month.getText());
         //month.setText("hallo");
