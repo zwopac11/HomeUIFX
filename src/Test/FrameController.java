@@ -246,8 +246,8 @@ public class FrameController implements Initializable {
         //String string = "January 2, 2010";
          
         
-        WeatherReader xml = new WeatherReader();
-        WeatherDay curDay= xml.read();
+        WeatherReader weatherReader = new WeatherReader();
+        WeatherDay curDay= weatherReader.read();
         WebEngine webEngine = wbWeather.getEngine();
         webEngine.loadContent(curDay.toString());
         cbNews.getItems().addAll("news","sport","discussion","help","science","oe3","fm4");
