@@ -121,8 +121,8 @@ public class FrameController implements Initializable {
     public void onCbChange(ActionEvent evt)
     {
 //        try {
-//            String output = (String) cbNews.getValue();
-//            System.out.println(output);
+            String output = (String) cbNews.getValue();
+            System.out.println(output);
 //            
 //            FeedReader reader = new FeedReader();
 //            reader.setURL(new URL("http://rss.orf.at/news.xml"));
