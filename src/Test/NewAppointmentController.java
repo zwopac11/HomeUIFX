@@ -110,8 +110,8 @@ public class NewAppointmentController implements Initializable {
         } catch (IOException ex) {
             System.out.println(ex.toString());
         } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(null, "Not a time!", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+           JOptionPane.showMessageDialog(null, "Not a time!", "Error", JOptionPane.ERROR_MESSAGE);
+       }
 
        
     }

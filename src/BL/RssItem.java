@@ -22,10 +22,6 @@ public class RssItem {
 
     @Override
     public String toString() {
-        return "<b>" + title + "</b><br>" + description + "<br>Source: " + link;
-    }
-    
-    
-    
-    
+        return "<b>" + title + "</b><br>" + description + "<br>Source: " + link+"<br><br>";
+    }  
 }

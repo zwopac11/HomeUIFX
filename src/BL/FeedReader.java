@@ -31,21 +31,23 @@ import org.xml.sax.SAXException;
           rssURL = url;  
        }  
       
-       public void getFeed() {  
+       public String  getFeed() {  
+           String output="";
           try {  
              DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();  
              Document doc = builder.parse(rssURL.openStream());  
-      
+             
              NodeList items = doc.getElementsByTagName("item");  
       
              for (int i = 0; i < items.getLength(); i++) {  
                 Element item = (Element)items.item(i);  
                 RssItem it = new RssItem(getValue( item, "title"), getValue((Element) item, "description"), getValue((Element) item, "link"));
-                
+                output+=it.toString();
              }  
           } catch (ParserConfigurationException | IOException | SAXException e) {  
               System.out.println(e.toString());  
           }  
+          return output;
        }  
       
        public String getValue(Element parent, String nodeName) {  
