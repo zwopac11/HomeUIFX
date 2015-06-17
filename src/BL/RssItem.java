@@ -11,17 +11,15 @@ package BL;
  */
 public class RssItem {
     public  String title;
-    public  String description;
     public  String link;
 
-    public RssItem(String title, String description, String link) {
+    public RssItem(String title, String link) {
         this.title = title;
-        this.description = description;
         this.link = link;
     }
 
     @Override
     public String toString() {
-        return "<b>" + title + "</b><br>" + description + "<br>Source: " + link+"<br><br>";
+        return "<b>" + title + "</b><br> Source: " + link+"<br><br>";
     }  
 }

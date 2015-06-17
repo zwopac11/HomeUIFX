@@ -6,43 +6,18 @@
 package Test;
 
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.HPos;
 import javafx.scene.control.Button;
-
 import javafx.scene.layout.GridPane;
 import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
 import BL.*;
-import java.awt.BorderLayout;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.text.ParseException;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -51,13 +26,16 @@ import javafx.stage.WindowEvent;
 /**
  * FXML Controller class
  *
- * @author Paul
+ * @author Paul, claudio
  */
 public class FrameController implements Initializable {
 
     Label lb = new Label();
     Button bt = new Button();
     Cal cal;
+    WeatherReader weatherReader; 
+    WebEngine weatherEngine,newsEngine  ;
+    WeatherDay curDay;
 
     private int this_month;
 
@@ -114,22 +92,40 @@ public class FrameController implements Initializable {
         gpCal = cal.lables(gpCal);
         Month();
     }
+    
+    
+    
+    public void onLocation(ActionEvent evt) {
+       try
+       {
+       String location = tfWeather.getText();
+       curDay = weatherReader.read(location);
+       weatherEngine = wbWeather.getEngine();
+       weatherEngine.loadContent(curDay.toString());
+       }catch(Exception ex)
+       {
+           weatherEngine = wbWeather.getEngine();
+           weatherEngine.loadContent("Sorry, an error occured while requesting your location! ");
+       }
+    }
     /**
      * 
      * @param evt 
      */
     public void onCbChange(ActionEvent evt)
     {
-//        try {
+        try {
             String output = (String) cbNews.getValue();
+            
             System.out.println(output);
-//            
-//            FeedReader reader = new FeedReader();
-//            reader.setURL(new URL("http://rss.orf.at/news.xml"));
-//            reader.getFeed();
-//        } catch (MalformedURLException ex) {
-//            Logger.getLogger(FrameController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+            
+            FeedReader reader = new FeedReader();
+            newsEngine = wbNews.getEngine();
+            newsEngine.loadContent(reader.getFeed(output));
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+            
+        }
     }
     
     private void Reload()
@@ -218,8 +214,7 @@ public class FrameController implements Initializable {
         Stage stage = new Stage();
         stage.setOnHiding(new EventHandler<WindowEvent>() {
                 public void handle(WindowEvent we) {
-                    Reload();
-                    
+                    Reload();   
                 }
             });  
         cal  = new Cal(stage);
@@ -232,7 +227,6 @@ public class FrameController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         gpCal.setStyle("-fx-border-color: red;");
         //gpNews.setStyle("-fx-border-color: blue;");
         
@@ -246,18 +240,18 @@ public class FrameController implements Initializable {
         //String string = "January 2, 2010";
          
         
-        WeatherReader weatherReader = new WeatherReader();
-        WeatherDay curDay= weatherReader.read();
-        WebEngine webEngine = wbWeather.getEngine();
-        webEngine.loadContent(curDay.toString());
+        weatherReader = new WeatherReader();
+        curDay= weatherReader.read("");
+        weatherEngine = wbWeather.getEngine();
+        weatherEngine.loadContent(curDay.toString());
         cbNews.getItems().addAll("news","sport","discussion","help","science","oe3","fm4");
         cbNews.setValue("news");
         
-        //month.setText(this_month+"");
-        //  System.out.println(month.getText());
-        //month.setText("hallo");
-//        XMLReader xmlr = new XMLReader();
-//        xmlr.requestFile();
+        FeedReader fr = new FeedReader();
+        System.out.println(fr.toString());
+            newsEngine = wbNews.getEngine();
+            newsEngine.loadContent(fr.getFeed("news"));
+
     }
 
 }

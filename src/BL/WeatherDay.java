@@ -13,21 +13,23 @@ public class WeatherDay {
 
     String temp_C;
     String weatherCode;
-    String windspeedKmph;
+    //String windspeedKmph;
     String precipMM;
     String humidity;
     String cloudcover;
     String desc;
+    String iconLink;
+    String location;
 
-    public WeatherDay(String temp_C, String weatherCode, String precipMM, String humidity, String cloudcover) {
+
+    public WeatherDay(String location, String temp_C, String weatherCode, String precipMM, String humidity, String cloudcover, String iconLink) {
+        this.location = location;
         this.temp_C = temp_C;
         this.weatherCode = weatherCode;
         this.precipMM = precipMM;
         this.humidity = humidity;
         this.cloudcover = cloudcover;
-    }
-
-    public WeatherDay() {
+        this.iconLink = iconLink;
     }
 
     public String getTemp_C() {
@@ -44,14 +46,6 @@ public class WeatherDay {
 
     public void setWeatherCode(String weatherCode) {
         this.weatherCode = weatherCode;
-    }
-
-    public String getWindspeedKmph() {
-        return windspeedKmph;
-    }
-
-    public void setWindspeedKmph(String windspeedKmph) {
-        this.windspeedKmph = windspeedKmph;
     }
 
     public String getPrecipMM() {
@@ -79,7 +73,7 @@ public class WeatherDay {
     }
 
     public String getWeatherDesc(String code) {
-         desc = "";
+        desc = "";
         switch (Integer.parseInt(code)) {
             case 395:
                 desc = "Moderate or heavy snow in area with thunder";
@@ -225,21 +219,22 @@ public class WeatherDay {
             case 113:
                 desc = "Clear/Sunny";
                 break;
-            default: desc="not listed";
-            
-                
-                
-                
+            default:
+                desc = "not listed";
+
         }
         return desc; //http://www.worldweatheronline.com/feed/wwoConditionCodes.txt
     }
 
     @Override
     public String toString() {
-        return "Actual Temperature: " + temp_C + "<br>"
+        System.out.println("<img border=<\"0 src=" + iconLink + "/>");
+        return "Actual Temperature in "+location+": " + temp_C + "°C<br>"
                 + getWeatherDesc(weatherCode) + "<br>"
-                + "Cloudcover: "+cloudcover+ "%<br>"
-                + "Humidity: "+humidity+"%<br>"; //To change body of generated methods, choose Tools | Templates.
+                + "<img border=\0 src='" + iconLink + "'/><br><br>"
+                + "Cloudcover: " + cloudcover + "%<br>"
+                + "Humidity: " + humidity + "%";
+                 
     }
 
 }

@@ -62,7 +62,7 @@
             </GridPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
                <bottom>
-                  <TextField fx:id="tfWeather" BorderPane.alignment="CENTER" />
+                  <TextField fx:id="tfWeather" onAction="#onLocation" BorderPane.alignment="CENTER" />
                </bottom>
                <center>
                   <WebView fx:id="wbWeather" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
