@@ -20,6 +20,7 @@ public class RssItem {
 
     @Override
     public String toString() {
-        return "<b>" + title + "</b><br> Source: " + link+"<br><br>";
+        return "<p style=\"background-color:#212121;color:#FFFFFF\"><b>" + title + "</b><br> Source: <a href='"+link+"' style='color:#FFFFFF;text-decoration:none' >" + link+"</a><br><br><p>";
+        //<a href="url">link text</a>
     }  
 }

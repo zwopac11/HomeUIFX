@@ -24,6 +24,10 @@ public class FeedReader {
     public String getFeed(String str) {
         String output = "";
         try {
+            if(str.equals("discussion"))
+            {
+                str= "debatten";
+            }
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(new URL("http://rss.orf.at/"+str+".xml").openStream());            
@@ -34,7 +38,7 @@ public class FeedReader {
             System.out.println("Node list size:"+items.getLength());
             for (int i = 0; i < items.getLength(); i++) {
                 Element item = (Element) items.item(i);
-                RssItem it = new RssItem(item.getElementsByTagName("title").item(0).getTextContent(),item.getElementsByTagName("title").item(0).getTextContent() );
+                RssItem it = new RssItem(item.getElementsByTagName("title").item(0).getTextContent(),item.getElementsByTagName("link").item(0).getTextContent() );
                 output += it.toString();
             }
         } catch (ParserConfigurationException | IOException | SAXException e) {

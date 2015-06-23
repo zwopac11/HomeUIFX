@@ -11,6 +11,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,17 +23,31 @@ import java.util.logging.Logger;
 public class Termin {
     
     private int day,year,month;
-    private String name,von,bis;
+    private String id,name,von,bis;
 
     public Termin(int day, int month, int year, String name, String von, String bis) {
+//        this.day = day;
+//        this.year = year;
+//        this.month = month;
+//        this.name = name;
+//        this.von = von;
+//        this.bis = bis;
+//        id=UUID.randomUUID().toString();
+        this(day, month, year, name, von, bis, UUID.randomUUID().toString());
+    }
+
+    public Termin(int day, int month, int year, String name, String von, String bis, String id) {
         this.day = day;
         this.year = year;
         this.month = month;
+        this.id = id;
         this.name = name;
         this.von = von;
         this.bis = bis;
     }
 
+    
+    
     public int getDay() {
         return day;
     }
@@ -80,15 +96,18 @@ public class Termin {
         this.bis = bis;
     }
 
+    public String getId() {
+        return id;
+    }
+    
+    
+    
     /**
      * checks if the time is a date
      * @return text of appointments 
      */
     @Override
     public String toString() {
-//        Date date = new SimpleDateFormat("HH:mm").parse(von+"");
-//        String newString = new SimpleDateFormat("H:mm").format(date);
-        
         SimpleDateFormat sdf = new SimpleDateFormat("kk:mm");
         DateFormat format = new SimpleDateFormat("kk:mm", Locale.ENGLISH);
         Date date,date2;
@@ -103,12 +122,32 @@ public class Termin {
         } catch (ParseException ex) {
             Logger.getLogger(FrameController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
         return  name + "\n" + von + " - " + bis + ' ';
     }
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Termin other = (Termin) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+
+
     
     
     

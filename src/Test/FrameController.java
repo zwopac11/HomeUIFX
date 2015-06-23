@@ -17,11 +17,16 @@ import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -41,6 +46,10 @@ public class FrameController implements Initializable {
 
     @FXML
     private GridPane gpCal;
+    @FXML
+    private BorderPane bpNews;
+    @FXML
+    private BorderPane bpWeather;
     @FXML
     private Button last;
     @FXML
@@ -70,12 +79,6 @@ public class FrameController implements Initializable {
         
         resetGridPane();
         
-        //gpCal.getChildren().removeAll();
-        //gpCal.getChildren().remove(3,3);
-//        gpCal.getRowConstraints().remove(4);
-////        gpCal.getChildren().remove(3);
-//        RowConstraints row = new RowConstraints();
-//        //gpCal.getRowConstraints().add(row);
         cal.setThis_month(this_month);
         gpCal = cal.lables(gpCal);
         Month();
@@ -94,7 +97,10 @@ public class FrameController implements Initializable {
     }
     
     
-    
+    /**
+     * 
+     * @param evt 
+     */
     public void onLocation(ActionEvent evt) {
        try
        {
@@ -127,7 +133,9 @@ public class FrameController implements Initializable {
             
         }
     }
-    
+    /**
+     * reloads the calendar GridPane using the resetGridPaun()
+     */
     private void Reload()
     {
         resetGridPane();
@@ -227,7 +235,7 @@ public class FrameController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        gpCal.setStyle("-fx-border-color: red;");
+        //gpCal.setStyle("-fx-border-color: red;");
         //gpNews.setStyle("-fx-border-color: blue;");
         
         gpCal = cal.lables(gpCal);
@@ -235,7 +243,24 @@ public class FrameController implements Initializable {
         this_month = cal.getThis_month();
         Month();
         
-        //gpCal.setStyle("-fx-background-color: black;");
+        
+        
+        
+        gpCal.setStyle("-fx-border: 2px solid; -fx-border-color: #EEEEEE;");
+        bpNews.setStyle("-fx-border: 2px solid; -fx-border-color: #EEEEEE;");
+        bpWeather.setStyle("-fx-border: 2px solid; -fx-border-color: #EEEEEE;");
+        //gpCal.setStyle("-fx-background-color: #b2ebf2;");
+        cbNews.setStyle("-fx-text-fill: #FFFFFF;");
+        
+        
+        
+        //tfWeather.setStyle("-fx-text-fill: #FFFFFF;");
+        //tfWeather.setStyle("-fx-control-inner-background: #64DD17");
+//        tfWeather.setStyle("-fx-background-color: #64DD17;-fx-background-radius: 4.0; -fx-border-radius: 4.0");
+        
+        //cbNews.setStyle("-fx-border-color: #9E9E9E;");
+        
+        cbNews.setStyle("-fx-background-color: #64DD17;");
         
         //String string = "January 2, 2010";
          
@@ -243,14 +268,43 @@ public class FrameController implements Initializable {
         weatherReader = new WeatherReader();
         curDay= weatherReader.read("");
         weatherEngine = wbWeather.getEngine();
-        weatherEngine.loadContent(curDay.toString());
+        weatherEngine.loadContent("<html style=\"background-color:#212121;color:#FFFFFF\">"+curDay.toString()+"</html>");
         cbNews.getItems().addAll("news","sport","discussion","help","science","oe3","fm4");
+//        cbNews.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+//          @Override
+//          public ListCell<String> call(ListView<String> param) {
+//            final ListCell<String> cell = new ListCell<String>() {
+//              {
+//                super.setPrefWidth(100);
+//              }
+//
+//              @Override
+//              public void updateItem(String item, boolean empty) {
+//                super.updateItem(item, empty);
+//                if (item != null) {
+//                  setTextFill(Color.RED);
+//                  if (item.contains("A")) {
+//                    setTextFill(Color.RED);
+//                  } else if (item.contains("B")) {
+//                    setTextFill(Color.GREEN);
+//                  } else {
+//                    setTextFill(Color.BLACK);
+//                  }
+//                } else {
+//                  setText(null);
+//                }
+//              }
+//            };
+//            return cell;
+//          }
+//        });
+        
         cbNews.setValue("news");
         
         FeedReader fr = new FeedReader();
         System.out.println(fr.toString());
             newsEngine = wbNews.getEngine();
-            newsEngine.loadContent(fr.getFeed("news"));
+            newsEngine.loadContent("<html style=\"background-color:#212121;color:#FFFFFF\">"+fr.getFeed("news")+"</html>");
 
     }
 

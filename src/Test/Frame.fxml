@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.event.Event?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Test.FrameController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Test.FrameController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -18,7 +18,7 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <GridPane alignment="BASELINE_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="551.0">
+      <GridPane alignment="BASELINE_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="551.0" style="-fx-background-color: #212121;">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -48,21 +48,24 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="lbMo" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Mo" GridPane.rowIndex="1" />
-                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Mi" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Di" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Do" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Fr" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Sa" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="So" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-                  <Button fx:id="last" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLast" text="&lt;" />
-                  <Button fx:id="next" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onNext" text="&gt;" GridPane.columnIndex="6" />
-                  <Label fx:id="month" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Label" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="5" />
+                  <Label fx:id="lbMo" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Mo" textFill="WHITE" GridPane.rowIndex="1" />
+                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Mi" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Di" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Do" textFill="WHITE" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Fr" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Sa" textFill="WHITE" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="So" textFill="WHITE" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                  <Button fx:id="last" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onLast" style="-fx-background-color: #0097a8;" text="&lt;" textFill="WHITE">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin></Button>
+                  <Button fx:id="next" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onNext" style="-fx-background-color: #0097a8;" text="&gt;" textFill="WHITE" GridPane.columnIndex="6" />
+                  <Label fx:id="month" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Label" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="5" />
                </children>
             </GridPane>
-            <BorderPane prefHeight="200.0" prefWidth="200.0">
+            <BorderPane fx:id="bpWeather" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #b2ebf2;">
                <bottom>
-                  <TextField fx:id="tfWeather" onAction="#onLocation" BorderPane.alignment="CENTER" />
+                  <TextField fx:id="tfWeather" onAction="#onLocation" style="-fx-background-color: #64DD17;" BorderPane.alignment="CENTER" />
                </bottom>
                <center>
                   <WebView fx:id="wbWeather" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
@@ -70,7 +73,7 @@
             </BorderPane>
          </children>
       </GridPane>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+      <BorderPane fx:id="bpNews" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
          <center>
             <WebView fx:id="wbNews" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </center>
