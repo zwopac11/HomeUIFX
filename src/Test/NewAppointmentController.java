@@ -99,7 +99,7 @@ public class NewAppointmentController implements Initializable {
             //Fehler wenn man selber ein Zahl eingibt
             Stage stage = (Stage) lbTitle.getScene().getWindow();
             stage.close();
-
+ 
         } catch (FileNotFoundException ex) {
             System.out.println(ex.toString());
         } catch (IOException ex) {
