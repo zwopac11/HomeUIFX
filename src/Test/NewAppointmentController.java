@@ -60,7 +60,6 @@ public class NewAppointmentController implements Initializable {
 
     private LinkedList<Termin> termine = new LinkedList<>();
 
-    //private Object[] appointments = mew Object[];
     @FXML
     private TextField tfName;
 //    @FXML
@@ -97,11 +96,6 @@ public class NewAppointmentController implements Initializable {
             Termin termin = new Termin(day, month, year, tfName.getText(), format.format(date), format.format(date2));
             termine.add(termin);
             writeFileNew();
-//            File file = new File(System.getProperty("user.dir") + File.separator + "src" + File.separator + "data" + File.separator + "termine.svg");
-//            FileWriter fw = new FileWriter(file, true);
-//            fw.write(day + ";" + month + ";" + year + ";" + tfName.getText() + ";" + format.format(date) + ";" + format.format(date2) + "\n");//tfVon.getText()+";"+tfBis.getText()
-//            fw.close();
-
             //Fehler wenn man selber ein Zahl eingibt
             Stage stage = (Stage) lbTitle.getScene().getWindow();
             stage.close();
@@ -146,50 +140,29 @@ public class NewAppointmentController implements Initializable {
         for (final Termin termin_now : termine) {
 
             if (termin_now.getDay() == day && termin_now.getMonth() == month && termin_now.getYear() == year) {
-
-                
-//                Node node1 = gpMain.getChildren().get(i+3);
-//                Node node2 = gpMain.getChildren().get(i+4);
-//                Node node3 = gpMain.getChildren().get(i+5);
-//                Node node4 = gpMain.getChildren().get(i+6);
-//                gpMain.addRow(i, node1);
-//                gpMain.addRow(i, node2);
-//                gpMain.addRow(i, node3);
-//                gpMain.addRow(i, node4);
-                
-//                RowConstraints row = new RowConstraints();
-//                gpMain.getRowConstraints().add(row);
-                
-//                gpMain.getRowConstraints().add(row);
-//                gpMain.getRowConstraints().add(row);
-                
-                
-                
                 final TextField text = new TextField();
-                //text.setEditable(false);
+
                 text.setStyle("-fx-background-color:  #64DD17;");
                 text.setText(termin_now.getName());
                 text.setMinWidth(260);
-                //gpMain.add(text, 0, i);
+
                 gpTest.add(text, 0, i);
                 
                 GridPane gp = new GridPane();
                 gp.setVgap(2);
 
                 final TextField von = new TextField();
-                //von.setEditable(false);
+
                 von.setText(termin_now.getVon());
                 von.setMaxWidth(115);
                 gp.add(von, 0, 0);
                 final TextField bis = new TextField();
-                //bis.setEditable(false);
+
                 bis.setText(termin_now.getBis());
                 bis.setMaxWidth(115);
                 gp.add(bis, 1, 0);
 
-                gpTest.add(gp, 1, i);
-                //gpMain.add(gp, 1, i);
-                
+                gpTest.add(gp, 1, i);             
                 
                 GridPane gp2 = new GridPane();
                 ColumnConstraints cc1 = new ColumnConstraints(10, 100, Double.MAX_VALUE);
@@ -244,20 +217,6 @@ public class NewAppointmentController implements Initializable {
                     }
                 });
                 gpTest.add(gp2, 2, i);
-                //gpMain.add(gp2, 2, i);
-               
-//                 GridPane gp3 = new GridPane();
-//                 ColumnConstraints cc1 = new ColumnConstraints(10, 100, Double.MAX_VALUE);
-//                 List<ColumnConstraints> cc = gp3.getColumnConstraints();
-//                 cc.add(cc1);
-//                 cc.add(cc1);
-//                
-//                Button text2 = new Button();
-//                text2.setMaxWidth(Double.MAX_VALUE);
-//                text2.setText("adfa");
-//                gp3.add(text2, 0, 0);
-//                gpMain.add(gp3, 2, i);
-                
                 spTest.setContent(gpTest);
                 
                 i++;
@@ -278,12 +237,7 @@ public class NewAppointmentController implements Initializable {
 
         FileOutputStream fos = null;
 
-        //tfName.getText();
         DateFormat format = new SimpleDateFormat("kk:mm", Locale.ENGLISH);
-//        Date date = format.parse(spStundenVon.getValue() + ":" + spMinVon.getValue());//tfVon.getText()
-//
-//        Date date2 = format.parse(spStundenBis.getValue() + ":" + spMinBis.getValue());//tfBis.getText()
-        //System.out.println(date+" "+date2);
         FileWriter fw = new FileWriter(file, true);
         for (Termin termine1 : termine) {
 
@@ -377,6 +331,5 @@ public class NewAppointmentController implements Initializable {
     public void onCancel(ActionEvent evt) {
         Stage stage = (Stage) lbTitle.getScene().getWindow();
         stage.close();
-        //stage.close();
     }
 }
